@@ -8,7 +8,7 @@
  
 body {
 	background: #202021;
-	color: #fff;
+	color: white;
 }
 
 /** Strings
@@ -181,14 +181,14 @@ pre.pretty-php .T_XOR_EQUAL {
 ******************************************************************************/
 pre.pretty-php .T_SL,
 pre.pretty-php .T_SR {
-	color: #000;
+	color: black;
 }
 
 /** PHP Open/Close Tags (<?php, ?>)
 ******************************************************************************/
 pre.pretty-php .T_OPEN_TAG, 
 pre.pretty-php .T_CLOSE_TAG {
-	color: #fff;
+	color: white;
 }
 
 /** Classnames
@@ -230,5 +230,5 @@ pre.pretty-php .C_OBJECT_PROPERTY {
 /** Class methods
 ******************************************************************************/
 pre.pretty-php .C_METHOD_CALL {
-	color: #fff!important;
+	color: white!important;
 }

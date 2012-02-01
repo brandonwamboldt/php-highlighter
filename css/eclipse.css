@@ -144,14 +144,14 @@ pre.pretty-php .T_PLUS_EQUAL,
 pre.pretty-php .T_SL_EQUAL,
 pre.pretty-php .T_SR_EQUAL,
 pre.pretty-php .T_XOR_EQUAL {
-	color: #000;
+	color: black;
 }
 
 /** Bitwise Operators (<< and >>)
 ******************************************************************************/
 pre.pretty-php .T_SL,
 pre.pretty-php .T_SR {
-	color: #000;
+	color: black;
 }
 
 /** PHP Open/Close Tags (<?php, ?>)
@@ -177,7 +177,7 @@ pre.pretty-php .T_OBJECT_OPERATOR + .T_STRING {
 /** Class methods
 ******************************************************************************/
 pre.pretty-php .C_METHOD_CALL {
-	color: #000!important;
+	color: black!important;
 }
 
 /** Heredocs
