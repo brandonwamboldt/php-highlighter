@@ -19,7 +19,7 @@
  * @author Brandon Wamboldt <brandon.wamboldt@gmail.com>
  * @license http://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * @link http://brandonwamboldt.ca/phplighter
- * @version 1.0.1
+ * @version 1.0.7
  */
 
 /**
@@ -28,7 +28,7 @@
  * @see PHPLighter::highlight()
  *
  * @author Brandon Wamboldt <brandon.wamboldt@gmail.com>
- * @since 1.0.0
+ * @since 1.0.6
  */
 class PHPLighter 
 {
@@ -92,10 +92,10 @@ class PHPLighter
 	 * @link http://www.phpdoc.org/docs/latest/for-users/list-of-tags.html
 	 * 
 	 * @access protected
-	 * @since 1.0.0
+	 * @since 1.0.1
 	 * @var string
 	 */
-	protected $phpdoc_tags = 'abstract|access|author|category|copyright|deprecated|example|final|filesource|global|ignore|internal|license|link|method|name|package|param|property|return|see|since|static|staticvar|subpacakage|throws|todo|tutorial|uses|var|version';
+	protected static $phpdoc_tags = 'abstract|access|author|category|copyright|deprecated|example|final|filesource|global|ignore|internal|license|link|method|name|package|param|property|return|see|since|static|staticvar|subpacakage|throws|todo|tutorial|uses|var|version';
 	
 	/**
 	 * Contains an array of PHP Magic Methods 
@@ -103,10 +103,10 @@ class PHPLighter
 	 * @link http://php.net/manual/en/language.oop5.magic.php
 	 * 
 	 * @access protected
-	 * @since 1.0.0
+	 * @since 1.0.1
 	 * @var array
 	 */
-	protected $magic_methods = array( 
+	protected static $magic_methods = array( 
 		'__sleep', 
 		'__wakeup', 
 		'__construct', 
@@ -166,19 +166,19 @@ class PHPLighter
 	 * @return string
 	 * 
 	 * @access public
-	 * @since 1.0.0
+	 * @since 1.0.1
 	 */
 	public function parse()
 	{
-		$in_namespace = FALSE;
-		$in_class     = FALSE;
-		$in_string    = FALSE;
-		$output       = '';
-		
 		// Basic parsing mode?
 		if ( $this->options & self::BASIC_HIGHLIGHTING ) {
 			return $this->basic_parse();
 		}
+
+		$in_namespace = FALSE;
+		$in_class     = FALSE;
+		$in_string    = FALSE;
+		$output       = '';
 		
 		// Go through each token and make it into a tag
 		foreach ( $this->tokens as $i => $token ) {
@@ -432,7 +432,7 @@ class PHPLighter
 	 * @return int
 	 * 
 	 * @access protected
-	 * @since 1.0.0
+	 * @since 1.0.1
 	 */
 	protected function next_token( $position, $modifier = 1, $significant = TRUE ) 
 	{
@@ -445,7 +445,7 @@ class PHPLighter
 		
 		// Return the next significant (Non T_WHITESPACE) token?
 		if ( $significant === TRUE ) {
-			
+
 			// If the requested token is a T_WHITESPACE token, call this function again but add 1 to the modifer
 			if ( $this->tokens[$position + $modifier][0] === T_WHITESPACE ) {
 				$token = $this->next_token( $position, $modifier + 1 );
@@ -453,13 +453,13 @@ class PHPLighter
 				$token = $this->tokens[$position + $modifier];
 			}
 		}
-		
+
 		// Return the next token
 		if ( is_array( $token ) ) {
 			return $token[0];
-		} else {
-			return $token;
 		}
+
+		return $token;
 	}
 	
 	/**
@@ -471,7 +471,7 @@ class PHPLighter
 	 * @return int
 	 * 
 	 * @access protected
-	 * @since 1.0.0
+	 * @since 1.0.1
 	 */
 	protected function prev_token( $position, $modifier = 1, $significant = TRUE ) 
 	{
@@ -479,9 +479,9 @@ class PHPLighter
 		if ( ! isset( $this->tokens[$position - $modifier] ) ) {
 			return 0;
 		}
-		
+
 		$token = $this->tokens[$position - $modifier];
-		
+
 		// Return the next significant (Non T_WHITESPACE) token?
 		if ( $significant === TRUE ) {
 			
@@ -492,13 +492,13 @@ class PHPLighter
 				$token = $this->tokens[$position - $modifier];
 			}
 		}
-		
+
 		// Return the next token
 		if ( is_array( $token ) ) {
 			return $token[0];
-		} else {
-			return $token;
 		}
+
+		return $token;
 	}
 	
 	/**
@@ -510,19 +510,19 @@ class PHPLighter
 	 * @return string|void
 	 * 
 	 * @access public
-	 * @since 1.0.0
+	 * @since 1.0.1
 	 * @static 
 	 */
-	public static function highlight( $source, $return = false, $options = 0 )
+	public static function highlight( $source, $return = FALSE, $options = 0 )
 	{
 		$p = new PHPLighter( $source, $options );
 		$str = $p->parse();
 		
 		if ( $return ) {
 			return $str;
-		} else {
-			echo $str;
 		}
+
+		echo $str;
 	}
 	
 }
