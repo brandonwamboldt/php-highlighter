@@ -1,6 +1,8 @@
 PHPLighter
 ==========
 
+About
+----------
 A PHP syntax highlighting engine the utilizes `token_get_all()` to produce a level of syntax highlighting that rivals any modern editor. No more barebone generic syntax highlighting!
 
 The indended purpose of this code is for sites that display a lot of code using basic syntax highlighting (Such as PasteBin) or programming blogs. There are lots of other uses for it though!
@@ -8,7 +10,7 @@ The indended purpose of this code is for sites that display a lot of code using 
 See it in action at http://brandonwamboldt.ca/source/example.php
 
 Usage
------
+----------
 
 ```
 <?php
@@ -23,7 +25,8 @@ There are options to disable these features however.
 
 ```
 <?php
-include( 'highlight_php.inc.php' );
+
+include 'highlight_php.inc.php';
 $php_str = file_get_contents( 'sample.php' );
 
 // Perform basic syntax highlight of PHP's built in tokens
@@ -36,8 +39,12 @@ PHPLighter::highlight( $php_str, FALSE, PHPLighter::NO_TOKENIZE_DOC_TAGS );
 PHPLighter::highlight( $php_str, FALSE, PHPLighter::NO_LINKIFY_LINKS | PHPLighter::NO_LINKIFY_EMAILS );
 ```
 
+License
+----------
+GNU General Public License version 3 (GPLv3). [http://www.gnu.org/licenses/gpl.txt](http://www.gnu.org/licenses/gpl.txt)
+
 Styles
-------
+----------
 
 The styles that are currently included with this library are: Eclipse PDT, Monokai (Based on the Sublime Text 2 version), Monokai Soda Dark (Based on the Sublime Text 2 theme of the same name), and Twilight (Based on the Sublime Text 2 theme of the same name).
 
