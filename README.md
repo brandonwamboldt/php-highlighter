@@ -42,3 +42,15 @@ Styles
 The styles that are currently included with this library are: Eclipse PDT, Monokai (Based on the Sublime Text 2 version), Monokai Soda Dark (Based on the Sublime Text 2 theme of the same name), and Twilight (Based on the Sublime Text 2 theme of the same name).
 
 I plan on included more themes and styles if anyone uses this library :)
+
+Why not use highlight_string?
+-----------------------------
+
+PHP provides a built-in function called `highlight_string` and `highlight_php`, meant for syntax highlighting. However, these functions are pretty simplistic. The highlighted source uses span tags with inline styles instead of classes, and there are only 4 different color options: 
+
+* `highlight.string` for the color of strings
+* `highlight.comment` for the color of comments
+* `highlight.keyword` for the color of PHP keywords
+* `highlight.default` for everything else
+
+This doesn't give you very many options. This library on the other hand will generate span tags with CSS classes instead of inline styles. There are *dozens* of classes that are used, to represent every builtin PHP token (T_STRING, T_COMMENT, T_IF, T_ECHO, etc), as well as a dozen or so custom tokens (C_DOCBLOCK_TAG, C_MAGIC_METHOD, C_OBJECT_PROPERTY, etc). This allows you to have very fine grained control over the styles that are outputed, giving you beautifully highlighted PHP.
