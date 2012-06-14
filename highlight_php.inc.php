@@ -298,6 +298,7 @@ class PHPLighter
 				// If we are in a namespace string and encounter a semicolon, end the namespace string
 				if ( $token == ';' && $in_namespace ) {
 					$output .= '</span><span class="C_SEMICOLON">;</span>';
+					$in_namespace = FALSE;
 				} 
 				
 				// Give semicolons a name
