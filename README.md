@@ -54,3 +54,26 @@ PHP provides a built-in function called `highlight_string` and `highlight_php`, 
 * `highlight.default` for everything else
 
 This doesn't give you very many options. This library on the other hand will generate span tags with CSS classes instead of inline styles. There are *dozens* of classes that are used, to represent every builtin PHP token (T_STRING, T_COMMENT, T_IF, T_ECHO, etc), as well as a dozen or so custom tokens (C_DOCBLOCK_TAG, C_MAGIC_METHOD, C_OBJECT_PROPERTY, etc). This allows you to have very fine grained control over the styles that are outputed, giving you beautifully highlighted PHP.
+
+**Examples**
+
+```
+<?php
+highlight_string('<?php phpinfo(); ?>');
+?>
+```
+
+The above example will output (in PHP 5):
+```
+<code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php phpinfo</span><span style="color: #007700">(); </span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code>
+```
+
+The above example will output (With this library):
+```
+<pre class="pretty-php"><span class="T_OPEN_TAG">&lt;?php </span><span class="T_STRING C_BUILTIN_FUNCTION">phpinfo</span>()<span class="C_SEMICOLON">;</span> <span class="T_CLOSE_TAG">?&gt;</span></pre></body>
+```
+
+The library example may look a bit overwhelming, but we include a few different styles with this library (Light and dark ones) that you can use directly or modify for your needs. As you can see, our generated HTML is cleaner and far easier to modify.
