@@ -5,6 +5,8 @@ A PHP syntax highlighting engine the utilizes `token_get_all()` to produce a lev
 
 The indended purpose of this code is for sites that display a lot of code using basic syntax highlighting (Such as PasteBin) or programming blogs. There are lots of other uses for it though!
 
+See it in action at http://brandonwamboldt.ca/source/example.php
+
 Usage
 -----
 
