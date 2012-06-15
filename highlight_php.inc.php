@@ -19,18 +19,8 @@
  * @author Brandon Wamboldt <brandon.wamboldt@gmail.com>
  * @license http://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * @link http://brandonwamboldt.ca/phplighter
- * @version 1.0.0
+ * @version 1.0.1
  */
-
-// Only basic classes will be added, for builtin tokens 
-define( 'PHPLIGHTER_BASIC_HIGHLIGHTING', 1 );
-
-// Don't add tags around PHPDoc tags
-define( 'PHPLIGHTER_NO_TOKENIZE_DOC_TAGS', 2 );
-
-// Don't linkify links/email addresses in source code
-define( 'PHPLIGHTER_NO_LINKIFY_LINKS', 4 );
-define( 'PHPLIGHTER_NO_LINKIFY_EMAILS', 8 );
 
 /**
  * The main PHPLighter class
@@ -42,6 +32,38 @@ define( 'PHPLIGHTER_NO_LINKIFY_EMAILS', 8 );
  */
 class PHPLighter 
 {
+	/**
+	 * Only basic classes will be added, for builtin tokens (No C_* classes)
+	 * 
+	 * @since 1.0.1
+	 * @var int
+	 */
+	const BASIC_HIGHLIGHTING = 1;
+
+	/**
+	 * PHPDoc tags such as @since, @access and @var will not be given tags
+	 * 
+	 * @since 1.0.1
+	 * @var int
+	 */
+	const NO_TOKENIZE_DOC_TAGS = 2;
+
+	/**
+	 * Links/URLs in comments will not be converted into HTML links
+	 * 
+	 * @since 1.0.1
+	 * @var int
+	 */
+	const NO_LINKIFY_LINKS = 4;
+
+	/**
+	 * E-mail addresses in comments will not be converted to mailto: links
+	 * 
+	 * @since 1.0.1
+	 * @var int
+	 */
+	const NO_LINKIFY_EMAILS = 8;
+
 	/**
 	 * An array of builtin functions (Functions included in a PHP extension)
 	 * 
@@ -154,7 +176,7 @@ class PHPLighter
 		$output       = '';
 		
 		// Basic parsing mode?
-		if ( $this->options & PHPLIGHTER_BASIC_HIGHLIGHTING ) {
+		if ( $this->options & self::BASIC_HIGHLIGHTING ) {
 			return $this->basic_parse();
 		}
 		
@@ -178,15 +200,15 @@ class PHPLighter
 				// Special handling for docblocks to deal with docblock tags, links and email links
 				else if ( $identifier === T_DOC_COMMENT ) {
 					
-					if ( ! ( $this->options & PHPLIGHTER_NO_TOKENIZE_DOC_TAGS ) ) {
+					if ( ! ( $this->options & self::NO_TOKENIZE_DOC_TAGS ) ) {
 						$token = preg_replace( '/(\@(' . $this->phpdoc_tags . '))(\s)/i', '<span class="C_DOCBLOCK_TAG">\1</span>\3', $token );
 					}
 					
-					if ( ! ( $this->options & PHPLIGHTER_NO_LINKIFY_LINKS ) ) {
+					if ( ! ( $this->options & self::NO_LINKIFY_LINKS ) ) {
 						$token = preg_replace( '/(http\:\/\/[A-Za-z0-9\.\/\-\_\~\#\?\=\&\!\%]*)/i', '<a href="\1" class="C_DOCBLOCK_LINK">\1</a>', $token );
 					}
 					
-					if ( ! ( $this->options & PHPLIGHTER_NO_LINKIFY_EMAILS ) ) {
+					if ( ! ( $this->options & self::NO_LINKIFY_EMAILS ) ) {
 						$token = preg_replace( '/\&lt\;([A-Za-z0-9].*?@.*?)\&gt\;/i', '&lt;<a href="mailto:\1" class="C_DOCBLOCK_LINK">\1</a>&gt;', $token );
 					}
 					
@@ -196,11 +218,11 @@ class PHPLighter
 				// Special handling for comments to deal with links and email links
 				else if ( $identifier === T_COMMENT ) {
 					
-					if ( ! ( $this->options & PHPLIGHTER_NO_LINKIFY_LINKS ) ) {
+					if ( ! ( $this->options & self::NO_LINKIFY_LINKS ) ) {
 						$token = preg_replace( '/(http\:\/\/[A-Za-z0-9\.\/\-\_\~\#\?\=\&\!\%]*)/i', '<a href="\1" class="C_COMMENT_LINK">\1</a>', $token );
 					}
 					
-					if ( ! ( $this->options & PHPLIGHTER_NO_LINKIFY_EMAILS ) ) {
+					if ( ! ( $this->options & self::NO_LINKIFY_EMAILS ) ) {
 						$token = preg_replace( '/\&lt\;([A-Za-z0-9].*?@.*?)\&gt\;/i', '&lt;<a href="mailto:\1" class="C_COMMENT_LINK">\1</a>&gt;', $token );
 					}
 					

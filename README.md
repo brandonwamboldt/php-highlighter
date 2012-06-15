@@ -27,13 +27,13 @@ include( 'highlight_php.inc.php' );
 $php_str = file_get_contents( 'sample.php' );
 
 // Perform basic syntax highlight of PHP's built in tokens
-PHPLighter::highlight( $php_str, FALSE, PHPLIGHTER_BASIC_HIGHLIGHTING );
+PHPLighter::highlight( $php_str, FALSE, PHPLighter::BASIC_HIGHLIGHTING );
 
 // Don't put tags around PHPDoc tags
-PHPLighter::highlight( $php_str, FALSE, PHPLIGHTER_NO_TOKENIZE_DOC_TAGS );
+PHPLighter::highlight( $php_str, FALSE, PHPLighter::NO_TOKENIZE_DOC_TAGS );
 
 // No auto links
-PHPLighter::highlight( $php_str, FALSE, PHPLIGHTER_NO_LINKIFY_LINKS | PHPLIGHTER_NO_LINKIFY_EMAILS );
+PHPLighter::highlight( $php_str, FALSE, PHPLighter::NO_LINKIFY_LINKS | PHPLighter::NO_LINKIFY_EMAILS );
 ```
 
 Styles
@@ -73,7 +73,7 @@ The above example will output (in PHP 5):
 
 The above example will output (With this library):
 ```
-<pre class="pretty-php"><span class="T_OPEN_TAG">&lt;?php </span><span class="T_STRING C_BUILTIN_FUNCTION">phpinfo</span>()<span class="C_SEMICOLON">;</span> <span class="T_CLOSE_TAG">?&gt;</span></pre></body>
+<pre class="pretty-php"><span class="T_OPEN_TAG">&lt;?php </span><span class="T_STRING C_BUILTIN_FUNCTION">phpinfo</span>()<span class="C_SEMICOLON">;</span> <span class="T_CLOSE_TAG">?&gt;</span></pre>
 ```
 
 The library example may look a bit overwhelming, but we include a few different styles with this library (Light and dark ones) that you can use directly or modify for your needs. As you can see, our generated HTML is cleaner and far easier to modify.
