@@ -171,16 +171,16 @@ class PHPLighter
 	 */
 	public function parse()
 	{
-		$in_namespace = FALSE;
-		$in_class     = FALSE;
-		$in_string    = FALSE;
-		$output       = '';
-		
 		// Basic parsing mode?
 		if ( $this->options & self::BASIC_HIGHLIGHTING ) {
 			return $this->basic_parse();
 		}
 		
+		$in_namespace = FALSE;
+		$in_class     = FALSE;
+		$in_string    = FALSE;
+		$output       = '';
+
 		// Go through each token and make it into a tag
 		foreach ( $this->tokens as $i => $token ) {
 		
@@ -458,9 +458,9 @@ class PHPLighter
 		// Return the next token
 		if ( is_array( $token ) ) {
 			return $token[0];
-		} else {
-			return $token;
 		}
+
+		return $token;
 	}
 	
 	/**
@@ -514,16 +514,16 @@ class PHPLighter
 	 * @since 1.0.0
 	 * @static 
 	 */
-	public static function highlight( $source, $return = false, $options = 0 )
+	public static function highlight( $source, $return = FALSE, $options = 0 )
 	{
 		$p = new PHPLighter( $source, $options );
 		$str = $p->parse();
 		
 		if ( $return ) {
 			return $str;
-		} else {
-			echo $str;
 		}
+		
+		echo $str;
 	}
 	
 }
