@@ -20,7 +20,7 @@
  * @author Brandon Wamboldt <brandon.wamboldt@gmail.com>
  * @license http://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * @link http://brandonwamboldt.ca/phplighter
- * @version 1.0.11
+ * @version 1.0.12
  */
 
 /**
