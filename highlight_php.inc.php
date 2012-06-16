@@ -11,15 +11,16 @@
  * Licensed under the Open Software License version 3.0
  *
  * This source file is subject to the Open Software License (OSL 3.0) that is
- * bundled with this package in the files license.txt / license.rst. It is
- * also available through the world wide web at this URL:
+ * bundled with this package in the file LICENSE. It is also available through
+ * the world wide web at this URL:
+ * 
  * http://opensource.org/licenses/OSL-3.0
  *
  * @package phplighter
  * @author Brandon Wamboldt <brandon.wamboldt@gmail.com>
  * @license http://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * @link http://brandonwamboldt.ca/phplighter
- * @version 1.0.1
+ * @version 1.0.9
  */
 
 /**
@@ -35,7 +36,7 @@ class PHPLighter
 	/**
 	 * Only basic classes will be added, for builtin tokens (No C_* classes)
 	 * 
-	 * @since 1.0.1
+	 * @since 1.0.8
 	 * @var int
 	 */
 	const BASIC_HIGHLIGHTING = 1;
@@ -43,7 +44,7 @@ class PHPLighter
 	/**
 	 * PHPDoc tags such as @since, @access and @var will not be given tags
 	 * 
-	 * @since 1.0.1
+	 * @since 1.0.8
 	 * @var int
 	 */
 	const NO_TOKENIZE_DOC_TAGS = 2;
@@ -51,7 +52,7 @@ class PHPLighter
 	/**
 	 * Links/URLs in comments will not be converted into HTML links
 	 * 
-	 * @since 1.0.1
+	 * @since 1.0.8
 	 * @var int
 	 */
 	const NO_LINKIFY_LINKS = 4;
@@ -59,7 +60,7 @@ class PHPLighter
 	/**
 	 * E-mail addresses in comments will not be converted to mailto: links
 	 * 
-	 * @since 1.0.1
+	 * @since 1.0.8
 	 * @var int
 	 */
 	const NO_LINKIFY_EMAILS = 8;
@@ -75,15 +76,6 @@ class PHPLighter
 	protected static $builtin_functions = NULL;
 	
 	/**
-	 * Class options
-	 * 
-	 * @access protected
-	 * @since 1.0.0
-	 * @var integer
-	 */
-	protected $options = 0;
-	
-	/**
 	 * Contains a list of PHPDoc tags separated by a | for use in a regex
 	 * 
 	 * PHPDocumentor tags are placed in docblock comments (Comments that start
@@ -95,7 +87,7 @@ class PHPLighter
 	 * @since 1.0.0
 	 * @var string
 	 */
-	protected $phpdoc_tags = 'abstract|access|author|category|copyright|deprecated|example|final|filesource|global|ignore|internal|license|link|method|name|package|param|property|return|see|since|static|staticvar|subpacakage|throws|todo|tutorial|uses|var|version';
+	protected static $phpdoc_tags = 'abstract|access|author|category|copyright|deprecated|example|final|filesource|global|ignore|internal|license|link|method|name|package|param|property|return|see|since|static|staticvar|subpacakage|throws|todo|tutorial|uses|var|version';
 	
 	/**
 	 * Contains an array of PHP Magic Methods 
@@ -106,7 +98,7 @@ class PHPLighter
 	 * @since 1.0.0
 	 * @var array
 	 */
-	protected $magic_methods = array( 
+	protected static $magic_methods = array( 
 		'__sleep', 
 		'__wakeup', 
 		'__construct', 
@@ -122,6 +114,15 @@ class PHPLighter
 		'__unset', 
 		'__clone'
 	);
+	
+	/**
+	 * Class options
+	 * 
+	 * @access protected
+	 * @since 1.0.0
+	 * @var integer
+	 */
+	protected $options = 0;
 	
 	/**
 	 * The original PHP source code to highlight
@@ -201,7 +202,7 @@ class PHPLighter
 				else if ( $identifier === T_DOC_COMMENT ) {
 					
 					if ( ! ( $this->options & self::NO_TOKENIZE_DOC_TAGS ) ) {
-						$token = preg_replace( '/(\@(' . $this->phpdoc_tags . '))(\s)/i', '<span class="C_DOCBLOCK_TAG">\1</span>\3', $token );
+						$token = preg_replace( '/(\@(' . self::$phpdoc_tags . '))(\s)/i', '<span class="C_DOCBLOCK_TAG">\1</span>\3', $token );
 					}
 					
 					if ( ! ( $this->options & self::NO_LINKIFY_LINKS ) ) {
@@ -281,7 +282,7 @@ class PHPLighter
 				}
 		
 				// PHP Magic Method definitions
-				else if ( $identifier === T_STRING && in_array( $token, $this->magic_methods ) ) {
+				else if ( $identifier === T_STRING && in_array( $token, self::$magic_methods ) ) {
 					$output .= '<span class="T_STRING C_MAGIC_METHOD">' . $token . '</span>';
 				}
 		

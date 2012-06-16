@@ -36,6 +36,11 @@ PHPLighter::highlight( $php_str, FALSE, PHPLighter::NO_TOKENIZE_DOC_TAGS );
 PHPLighter::highlight( $php_str, FALSE, PHPLighter::NO_LINKIFY_LINKS | PHPLighter::NO_LINKIFY_EMAILS );
 ```
 
+License
+-------
+
+Open Software License ("OSL") v 3.0. http://opensource.org/licenses/OSL-3.0
+
 Styles
 ------
 
