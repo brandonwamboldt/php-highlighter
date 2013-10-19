@@ -1,0 +1,17 @@
+{
+    "name": "brandonwamboldt/php-highlighter",
+    "type": "library",
+    "description": "A PHP syntax highlighting engine",
+    "keywords": ["php", "highlighting"],
+    "homepage": "https://github.com/brandonwamboldt/php-highlighter",
+    "license": "OSL 3.0",
+    "authors": [
+        {
+            "name": "Brandon Wamboldt",
+            "email": "brandon.wamboldt@gmail.com"
+        }
+    ],
+    "autoload": {
+        "files": ["highlight_php.inc.php"]
+    }
+}
